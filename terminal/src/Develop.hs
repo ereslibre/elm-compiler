@@ -40,12 +40,13 @@ import qualified Stuff
 
 data Flags =
   Flags
-    { _port :: Maybe Int
+    { _index :: Maybe String
+    , _port :: Maybe Int
     }
 
 
 run :: () -> Flags -> IO ()
-run () (Flags maybePort) =
+run () (Flags maybeIndex maybePort) =
   do  let port = maybe 8000 id maybePort
       putStrLn $ "Go to http://localhost:" ++ show port ++ " to see your project dashboard."
       httpServe (config port) $

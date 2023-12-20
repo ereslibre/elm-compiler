@@ -152,9 +152,21 @@ reactor =
 
     reactorFlags =
       flags Develop.Flags
+        |-- flag "index" index_ "The index of the server (default: none)"
         |-- flag "port" port_ "The port of the server (default: 8000)"
   in
   Terminal.Command "reactor" (Common summary) details example noArgs reactorFlags Develop.run
+
+
+index_ :: Parser String
+index_ =
+  Parser
+    { _singular = "index"
+    , _plural = "indexes"
+    , _parser = readMaybe
+    , _suggest = \_ -> return []
+    , _examples = \_ -> return ["index.html"]
+    }
 
 
 port_ :: Parser Int
